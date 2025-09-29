@@ -51,4 +51,41 @@ function add_A320(pos_x, pos_y, pos_z, rot_x, rot_y, rot_z) {
     });
 }
 
-export { add_A320, addSphere };
+function add_Pushback(pos_x, pos_y, pos_z, rot_x, rot_y, rot_z) {
+    // Retornamos una nueva Promesa
+    return new Promise((resolve, reject) => {
+        loader.load("./Handling_vehicles/pushback.glb", function (gltf) {
+            let model = gltf.scene;
+
+            model.position.set(pos_x, pos_y, pos_z);
+            model.rotation.x = degToRad(rot_x);
+            model.rotation.y = degToRad(rot_y);
+            model.rotation.z = degToRad(rot_z);
+            model.scale.set(0.005, 0.005, 0.005);
+
+            model.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        color: 0xFFFF00,
+                        metalness: 0,
+                        roughness: 1
+                    });
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+
+            scene.add(model);
+
+            // Cuando la carga y configuración terminan, resolvemos la Promesa con el modelo
+            resolve(model);
+
+        }, undefined, function (error) {
+            console.error(error);
+            // Si hay un error, rechazamos la Promesa
+            reject(error);
+        });
+    });
+}
+
+export { add_A320, add_Pushback, addSphere };
