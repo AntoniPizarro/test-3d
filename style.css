@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+#rot-x,
+#rot-y,
+#rot-z {
+    position: absolute;
+}
+
+#rot-x {
+    top: 10px;
+    left: 5px;
+}
+
+#rot-y {
+    top: 25px;
+    left: 5px;
+}
+
+#rot-z {
+    top: 40px;
+    left: 5px;
+}
+
+#info-panel {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
